@@ -13,7 +13,8 @@ var _classes = {
 	next: ".next"
 };
 var _ids = {
-	lessons: "#lessons"
+	lessons: "#lessons",
+	music: "#music"
 };
 
 var loginEvent = {
@@ -38,6 +39,7 @@ var loginEvent = {
 		  	var imgNm = $(".home").attr("src");
 		  	imgNm = imgNm.replace("images/home", "");
 		  	if (name == imgNm) {
+		  		_const.lessons = _const.lessons - 1;
 		  		$('#exampleModal').modal('show');
 		  		$("#ans").attr("src", "images/matcuoi.jpg");
 		  		var audio = new Audio('custom/votay.mp3');
@@ -52,17 +54,19 @@ var loginEvent = {
 		  	}
 		  });
 		});
-
-		$( _classes.next ).click(function() {
-			_const.lessons = _const.lessons - 1;
+		$( _classes.next).click(function() {
 			$(_ids.lessons).html(_const.lessons);
-			/*if (_const.lessons == 0) {
-		  	  alert('Hết bài tập rồi, nhất F5 ở bàn phím đi');
-		  	  return;
-		    }*/
+			if (_const.lessons == 0) {
+		  	  alert('Hết bài tập rồi, nhấn F5 ở bàn phím đi');
+		  	  location.reload();
+		    }
 			_const.array.splice(_const.itemRemove, 1); 
 		    $(".number").removeAttr("style");
 		    initImage();
+		});
+		$( _ids.music).click(function() {
+			var audio = new Audio('custom/baihat.mp3');
+			audio.play();
 		});
     }
 };
